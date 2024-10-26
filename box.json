@@ -1,0 +1,18 @@
+{
+    "output": "spdx.phar",
+    "files": [
+        "LICENSE",
+        "vendor/autoload.php"
+    ],
+    "finder": [
+        {
+            "name": ["*.php"],
+            "exclude": ["tests"],
+            "in": [
+                "src",
+                "vendor"
+            ]
+        }
+    ],
+    "main": "bin/console.php"
+}

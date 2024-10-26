@@ -1,0 +1,8 @@
+#!/usr/bin/env php
+<?php
+/**
+ * SPDX-FileCopyrightText: 2024 Vitor Mattos <vitor@php.rio>
+ * SPDX-License-Identifier: AGPL-3.0-or-later
+ */
+
+require __DIR__ . '/console.php';

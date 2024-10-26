@@ -1,0 +1,33 @@
+{
+    "name": "librecodecoo/spdx-header-updater",
+    "description": "Easily update license headers in your source code to the SPDX standard with a single command! Simple to install and includes a dry-run option. Ensure your project's compliance! ",
+    "type": "library",
+    "license": "AGPL-3.0-or-later",
+    "require": {
+        "symfony/console": "^6.4",
+        "symfony/finder": "^6.4"
+    },
+    "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.64",
+        "vimeo/psalm": "^5.26"
+    },
+    "autoload": {
+        "psr-4": {
+            "SpdxConvertor\\": "src/"
+        }
+    },
+    "config": {
+        "platform": {
+            "php": "8.1"
+        },
+        "sort-packages": true
+    },
+    "scripts": {
+        "lint": "find . -name \\*.php -not -path './vendor/*' -not -path './build/*' -print0 | xargs -0 -n1 php -l",
+        "cs:check": "php-cs-fixer fix --dry-run --diff",
+        "cs:fix": "php-cs-fixer fix",
+        "psalm": "psalm --threads=$(nproc)",
+        "psalm:update-baseline": "psalm --threads=$(nproc) --update-baseline --set-baseline=tests/psalm-baseline.xml",
+        "psalm:clear": "psalm --clear-cache && psalm --clear-global-cache"
+    }
+}

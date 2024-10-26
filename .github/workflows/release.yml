@@ -1,0 +1,40 @@
+# SPDX-FileCopyrightText: 2024 LibreCode coop and contributors
+# SPDX-License-Identifier: AGPL-3.0-or-later
+
+name: Build and publish phar
+
+on:
+  release:
+    types: [published]
+
+jobs:
+  build_and_publish:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check actor permission
+        uses: skjnldsv/check-actor-permission@69e92a3c4711150929bca9fcf34448c5bf5526e7 # v3.0
+        with:
+          require: write
+
+      - name: Checkout
+        uses: actions/checkout@692973e3d937129bcbf40652eb9f2f61becf3332 # v4.1.7
+
+      - name: Setup PHP with tools
+        uses: shivammathur/setup-php@v2
+        with:
+            php-version: '8.3'
+            tools: box
+
+      - name: Box
+        run: box compile
+
+      - name: Attach tarball to github release
+        uses: svenstaro/upload-release-action@04733e069f2d7f7f0b4aebc4fbdbce8613b03ccd # v2
+        id: attach_to_release
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: spdx.phar
+          asset_name: spdx.phar
+          tag: ${{ github.ref }}
+          overwrite: true
